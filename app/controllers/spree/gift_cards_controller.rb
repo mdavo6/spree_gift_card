@@ -38,6 +38,7 @@ module Spree
           order.save!
           # Save gift card
           @gift_card.line_item = line_item
+          @gift_card.currency = current_currency
           @gift_card.save!
         end
         redirect_to cart_path
