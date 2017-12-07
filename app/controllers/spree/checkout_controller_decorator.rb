@@ -28,6 +28,11 @@ Spree::CheckoutController.class_eval do
       unless @gift_card
         redirect_to checkout_state_path(@order.state), flash: { error: Spree.t('gift_code_not_found') } and return
       end
+
+      # Added for multi currency
+      unless @order.currency == @gift_card.currency
+        redirect_to checkout_state_path(@order.state), flash: { error: Spree.t('currency_must_be_the_same') } and return
+      end
     end
 
     def gift_card_payment_method

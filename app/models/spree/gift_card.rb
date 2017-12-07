@@ -15,18 +15,25 @@ module Spree
 
     has_many :transactions, class_name: 'Spree::GiftCardTransaction'
 
-    validates :current_value, :name, :original_value, :code, :email, presence: true
+    has_many :bookkeeping_documents, as: :printable, dependent: :destroy
+    has_one :gift_certificate, -> { where(template: 'gift_certificate') },
+          class_name: 'Spree::BookkeepingDocument',
+          as: :printable
+
+    validates :current_value, :name, :original_value, :code, presence: true
 
     with_options allow_blank: true do
       validates :code, uniqueness: { case_sensitive: false }
       validates :current_value, numericality: { greater_than_or_equal_to: 0 }
-      validates :email, email: true
     end
 
     validate :amount_remaining_is_positive, if: :current_value
 
     before_validation :generate_code, on: :create
     before_validation :set_values, on: :create
+
+    extend DisplayMoney
+    money_methods :current_value, :original_value
 
     def safely_redeem(user)
       if able_to_redeem?(user)
@@ -198,13 +205,14 @@ module Spree
 
     def generate_code
       until self.code.present? && self.class.where(code: self.code).count == 0
-        self.code = Digest::SHA1.hexdigest([Time.now, rand].join)
+        self.code = Digest::SHA2.hexdigest([Time.now, rand].join)[0,10]
       end
     end
 
     def set_values
       self.current_value ||= self.variant.try(:price)
       self.original_value ||= self.variant.try(:price)
+      self.currency ||= self.variant.try(:currency)
     end
 
     def amount_remaining_is_positive

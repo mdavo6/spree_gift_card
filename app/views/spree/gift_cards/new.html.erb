@@ -1,5 +1,5 @@
-<fieldset>
-  <legend align="center"><%= Spree.t(:gift_cards) %> </legend>
+<fieldset id="gift-card-container">
+  <h1 class="taxon-title"><%= Spree.t(:gift_certificates) %></h1>
   <%= render "spree/shared/error_messages", target: @gift_card %>
   <%= form_for @gift_card do |f| %>
     <div class="col-md-6 col-md-offset-3">
@@ -10,19 +10,13 @@
       </fieldset>
 
       <fieldset class="form-group">
-        <%= f.label :email, Spree.t("email") %>
-        <span class="required">*</span><br/>
-        <%= f.text_field :email, class: 'form-control' %>
-      </fieldset>
-
-      <fieldset class="form-group">
-        <%= f.label :name, Spree.t("recipient_name") %>
+        <%= f.label :name, Spree.t(:name_of_gift_recipient) %>
         <span class="required">*</span><br/>
         <%= f.text_field :name, class: 'form-control' %>
       </fieldset>
 
       <fieldset class="form-group">
-        <%= f.label :note, Spree.t("note") %><br/>
+        <%= f.label :note, Spree.t(:message_to_recipient) %><br/>
         <%= f.text_area :note, rows: 6, class: 'form-control' %>
       </fieldset>
 

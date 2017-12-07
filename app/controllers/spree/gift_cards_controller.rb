@@ -27,7 +27,8 @@ module Spree
           line_item = LineItem.new(quantity: 1)
           line_item.gift_card = @gift_card
           line_item.variant = @gift_card.variant
-          line_item.price = @gift_card.variant.price
+          line_item.price = @gift_card.variant.price_in(current_currency).amount
+          line_item.currency = current_currency
           # Add to order
           order = current_order(create_order_if_necessary: true)
           order.line_items << line_item
@@ -61,11 +62,11 @@ module Spree
 
     def find_gift_card_variants
       gift_card_product_ids = Product.not_deleted.where(is_gift_card: true).pluck(:id)
-      @gift_card_variants = Variant.joins(:prices).where(["amount > 0 AND product_id IN (?)", gift_card_product_ids]).order("amount")
+      @gift_card_variants = Variant.joins(:prices).where(["amount > 0 AND product_id IN (?) AND currency IN (?)", gift_card_product_ids, current_currency]).order("amount")
     end
 
     def gift_card_params
-      params.require(:gift_card).permit(:email, :name, :note, :variant_id)
+      params.require(:gift_card).permit(:name, :note, :variant_id)
     end
 
     def load_master_variant

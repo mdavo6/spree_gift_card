@@ -16,8 +16,7 @@
       <th><%= Spree.t(:code) %></th>
       <th><%= Spree.t(:original_value) %></th>
       <th><%= Spree.t(:current_value) %></th>
-      <th><%= Spree.t(:email) %></th>
-      <th><%= Spree.t(:name) %></th>
+      <th><%= Spree.t(:recipient) %></th>
       <th><%= Spree.t(:note) %></th>
       <th class="actions" width="100"></th>
     </tr>
@@ -26,9 +25,8 @@
     <% @gift_cards.each do |card| %>
       <tr id="<%= spree_dom_id card %>">
         <td><%= card.code %></td>
-        <td><%= number_to_currency card.original_value %></td>
-        <td><%= number_to_currency card.current_value %></td>
-        <td><%= card.email %></td>
+        <td><%= card.display_original_value %></td>
+        <td><%= card.display_current_value %></td>
         <td><%= card.name %></td>
         <td><%= card.note %></td>
         <td class="actions">
