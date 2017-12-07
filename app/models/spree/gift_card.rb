@@ -20,7 +20,7 @@ module Spree
           class_name: 'Spree::BookkeepingDocument',
           as: :printable
 
-    validates :current_value, :name, :original_value, :code, presence: true
+    validates :current_value, :name, :original_value, :currency, :code, presence: true
 
     with_options allow_blank: true do
       validates :code, uniqueness: { case_sensitive: false }
@@ -210,9 +210,8 @@ module Spree
     end
 
     def set_values
-      self.current_value ||= self.variant.try(:price)
-      self.original_value ||= self.variant.try(:price)
-      self.currency ||= self.variant.try(:currency)
+      self.current_value ||= self.variant.price_in(currency).amount
+      self.original_value ||= self.variant.price_in(currency).amount
     end
 
     def amount_remaining_is_positive

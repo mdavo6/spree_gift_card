@@ -38,7 +38,6 @@ module Spree
           order.save!
           # Save gift card
           @gift_card.line_item = line_item
-          @gift_card.currency = current_currency
           @gift_card.save!
         end
         redirect_to cart_path
@@ -67,7 +66,7 @@ module Spree
     end
 
     def gift_card_params
-      params.require(:gift_card).permit(:name, :note, :variant_id)
+      params.require(:gift_card).permit(:name, :note, :currency, :variant_id)
     end
 
     def load_master_variant
