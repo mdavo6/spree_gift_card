@@ -14,7 +14,7 @@ en:
     gift_card_calculator: 'Gift Card Calculator'
     gift_card_discount: 'Gift Card Discount'
     gift_card_email:
-      subject: 'Congratulation! Gift Card Received!'
+      subject: 'Your BoldB Gift Certificate'
     gift_card_payment_method:
       insufficient_authorized_amount: "Unable to capture more than authorized amount"
       insufficient_funds: "Gift Card amount remaining is not sufficient"
