@@ -2,10 +2,6 @@
  *= require spree/frontend
 */
 
-.cart-item-description {
-  width: 50%;
-}
-
 .glyphicon-minus-sign {
   margin-top: 5px;
 }
