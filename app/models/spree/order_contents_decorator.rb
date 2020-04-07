@@ -1,7 +1,4 @@
 Spree::OrderContents.class_eval do
-
-  alias_method :orig_grab_line_item_by_variant, :grab_line_item_by_variant
-
   def grab_line_item_by_variant(variant, raise_error = false, args = {})
     raise_error = args[0] || false
 
@@ -17,5 +14,7 @@ Spree::OrderContents.class_eval do
 
     line_item
   end
+
+  alias_method :orig_grab_line_item_by_variant, :grab_line_item_by_variant
 
 end
