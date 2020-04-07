@@ -1,15 +1,15 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_gift_card'
-  s.version     = '3.5.0'
+  s.version     = '3.6.1'
   s.summary     = 'Spree Gift Card'
   s.description = 'Spree Gift Card Extension'
 
-  s.authors     = ['Jeff Dutil']
-  s.email       = ['jdutil@burlingtonwebapps.com']
+  s.authors     = ['Michael Davidson, Jeff Dutil']
+  s.email       = ['michael@boldb.com.au']
   s.homepage    = 'https://github.com/vinsol/spree_gift_card'
 
-  spree_version = '~> 3.5.0'
+  spree_version = '~> 3.6.1'
 
   s.files       = `git ls-files`.split("\n")
   s.test_files  = `git ls-files -- {test,spec,features}/*`.split("\n")
