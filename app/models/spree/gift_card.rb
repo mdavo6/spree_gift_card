@@ -1,4 +1,4 @@
-require 'app/validators/email_validator'
+require 'spree/core/validators/email' if Spree.version.to_f < 3.5
 
 module Spree
   class GiftCard < ActiveRecord::Base
