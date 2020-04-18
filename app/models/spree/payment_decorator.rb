@@ -28,4 +28,4 @@ module SpreeGiftCard
   end
 end
 
-::Spree::Payment.prepare(SpreeGiftCard::Spree::PaymentDecorator)
+::Spree::Payment.prepend(SpreeGiftCard::Spree::PaymentDecorator)
