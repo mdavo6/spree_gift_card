@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_gift_card'
-  s.version     = '3.3.0'
+  s.version     = '3.4.0'
   s.summary     = 'Spree Gift Card'
   s.description = 'Spree Gift Card Extension'
 
@@ -9,19 +9,18 @@ Gem::Specification.new do |s|
   s.email       = ['michael@boldb.com.au']
   s.homepage    = 'https://github.com/vinsol/spree_gift_card'
 
-  spree_version = '~> 3.3.0'
-
   s.files       = `git ls-files`.split("\n")
   s.test_files  = `git ls-files -- {test,spec,features}/*`.split("\n")
 
   s.require_path = 'lib'
-  s.required_ruby_version = '>= 2.2.0'
+  s.required_ruby_version = '>= 2.2.7'
   s.requirements << 'none'
 
-  s.add_dependency 'spree_api',         spree_version
-  s.add_dependency 'spree_backend',     spree_version
-  s.add_dependency 'spree_core',        spree_version
-  s.add_dependency 'spree_frontend',    spree_version
+  s.add_dependency 'spree_api',         '>= 3.2.0' , '< 4.0'
+  s.add_dependency 'spree_backend',     '>= 3.2.0' , '< 4.0'
+  s.add_dependency 'spree_core',        '>= 3.2.0' , '< 4.0'
+  s.add_dependency 'spree_frontend',    '>= 3.2.0' , '< 4.0'
+  s.add_dependency 'spree_extension'
 
   s.add_development_dependency 'capybara', '~> 2.0'
   s.add_development_dependency 'coffee-rails'
