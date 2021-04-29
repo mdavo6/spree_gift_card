@@ -1,14 +1,20 @@
-Spree::LineItem.class_eval do
+module Spree
+  module LineItemDecorator
 
-  has_one :gift_card, dependent: :destroy
+    def self.prepended(base)
+      base.has_one :gift_card, dependent: :destroy
+    end
 
-  MAXIMUM_GIFT_CARD_LIMIT = 1
+    MAXIMUM_GIFT_CARD_LIMIT = 1
 
-  with_options if: :is_gift_card? do
-    validates :gift_card, presence: true
-    validates :quantity,  numericality: { less_than_or_equal_to: MAXIMUM_GIFT_CARD_LIMIT }, allow_nil: true
+    with_options if: :is_gift_card? do
+      validates :gift_card, presence: true
+      validates :quantity,  numericality: { less_than_or_equal_to: MAXIMUM_GIFT_CARD_LIMIT }, allow_nil: true
+    end
+
+    delegate :is_gift_card?, to: :product
+
   end
-
-  delegate :is_gift_card?, to: :product
-
 end
+
+::Spree::LineItem.prepend(Spree::LineItemDecorator)

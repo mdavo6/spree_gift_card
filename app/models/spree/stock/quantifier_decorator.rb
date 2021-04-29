@@ -1,7 +1,9 @@
 module Spree
   module Stock
-    Quantifier.class_eval do
+    module QuantifierDecorator
       include Spree::QuantifierCanSupply
     end
   end
 end
+
+::Spree::Stock::Quantifier.prepend(Spree::Stock::QuantifierDecorator)

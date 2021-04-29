@@ -1,6 +1,12 @@
-Spree::Product.class_eval do
+module Spree
+  module ProductDecorator
 
-  scope :gift_cards, -> { where(is_gift_card: true) }
-  scope :not_gift_cards, -> { where(is_gift_card: false) }
+    def self.prepended(base)
+      base.scope :gift_cards, -> { where(is_gift_card: true) }
+      base.scope :not_gift_cards, -> { where(is_gift_card: false) }
+    end
 
+  end
 end
+
+::Spree::Product.prepend(Spree::ProductDecorator)
