@@ -1,9 +1,10 @@
-Spree::CheckoutController.class_eval do
+module Spree
+  module CheckoutControllerDecorator
 
-  before_action :load_gift_card, only: [:update], if: :payment_via_gift_card?
-  before_action :add_gift_card_payments, only: [:update], if: :payment_via_gift_card?
+    before_action :load_gift_card, only: [:update], if: :payment_via_gift_card?
+    before_action :add_gift_card_payments, only: [:update], if: :payment_via_gift_card?
 
-  private
+    private
 
     def add_gift_card_payments
       @order.add_gift_card_payments(@gift_card)
@@ -38,4 +39,7 @@ Spree::CheckoutController.class_eval do
     def gift_card_payment_method
       @gift_card_payment_method ||= Spree::PaymentMethod.gift_card.available.first
     end
+  end
 end
+
+::Spree::CheckoutController.prepend(Spree::CheckoutControllerDecorator)
