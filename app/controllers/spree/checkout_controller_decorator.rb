@@ -1,8 +1,10 @@
 module Spree
   module CheckoutControllerDecorator
 
-    before_action :load_gift_card, only: [:update], if: :payment_via_gift_card?
-    before_action :add_gift_card_payments, only: [:update], if: :payment_via_gift_card?
+    def self.prepended(base)
+      base.before_action :load_gift_card, only: [:update], if: :payment_via_gift_card?
+      base.before_action :add_gift_card_payments, only: [:update], if: :payment_via_gift_card?
+    end
 
     private
 

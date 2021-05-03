@@ -1,7 +1,9 @@
 module Spree
   module ProductsControllerDecorator
 
-    before_action :redirect_gift_card, only: :show
+    def self.prepended(base)
+      base.before_action :redirect_gift_card, only: :show
+    end
 
     private
 
