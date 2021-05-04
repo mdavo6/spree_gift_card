@@ -3,11 +3,9 @@ module Spree
 
     def self.prepended(base)
       base.scope :gift_cards, -> { where(source_type: Spree::GiftCard.to_s) }
+      base.delegate :gift_card?, to: :payment_method, allow_nil: true
+      base.state_machine.after_transition to: :completed, do: :send_gift_card
     end
-
-    delegate :gift_card?, to: :payment_method, allow_nil: true
-
-    state_machine.after_transition to: :completed, do: :send_gift_card
 
     def send_gift_card
       order.line_items.each do |li|
