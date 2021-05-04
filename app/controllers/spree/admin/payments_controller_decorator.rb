@@ -2,9 +2,7 @@ module Spree
   module Admin
     module PaymentsControllerDecorator
 
-      def self.prepended(base)
-        base.create.before :build_gift_card_payment
-      end
+      create.before :build_gift_card_payment
 
       def build_gift_card_payment
         if payment_via_gift_card?
