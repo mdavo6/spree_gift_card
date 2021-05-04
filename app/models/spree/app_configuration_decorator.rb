@@ -1,6 +1,10 @@
 module Spree
   module AppConfigurationDecorator
-    preference :allow_gift_card_redeem, :boolean, default: true
+
+    def self.prepended(base)
+      preference :allow_gift_card_redeem, :boolean, default: true
+    end
+    
   end
 end
 
