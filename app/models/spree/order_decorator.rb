@@ -1,7 +1,9 @@
 module Spree
   module OrderDecorator
 
-    include Spree::Order::GiftCard
+    def self.prepended(base)
+      base.include Spree::Order::GiftCard
+    end
 
   end
 end
