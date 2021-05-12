@@ -1,11 +1,11 @@
 module Spree
   module AppConfigurationDecorator
 
-    def self.included(base)
+    def self.prepended(base)
       base.preference :allow_gift_card_redeem, :boolean, default: true
     end
 
   end
 end
 
-::Spree::AppConfiguration.include(Spree::AppConfigurationDecorator)
+::Spree::AppConfiguration.prepend(Spree::AppConfigurationDecorator)
