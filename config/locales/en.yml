@@ -28,11 +28,14 @@ en:
     gift_card_settings: 'Gift Card Settings'
     gift_card_user: 'Gift Card User'
     gift_cards: "Gift cards"
+    gift_certificates: New gift certificate
     gift_code: 'Gift Code'
     gift_code_applied: 'Gift code has been successfully applied to your order.'
     gift_code_already_applied: 'Gift code has already been used.'
     gift_code_not_found: "The gift code you entered doesn't exist. Please try again."
     is_gift_card: "is gift card"
+    message_to_recipient: Gift message (optional)
+    name_of_gift_recipient: Name of recipient
     new_gift_card: 'New Gift Card'
     note: "Note"
     original_value: "Original Value"

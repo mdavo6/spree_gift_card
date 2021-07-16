@@ -2,6 +2,7 @@ module Spree
   class GiftCardsController < Spree::StoreController
 
     before_action :load_master_variant, only: :new
+
     before_action :load_gift_card, only: :redeem
 
     def redeem
@@ -22,7 +23,6 @@ module Spree
         # Wrap the transaction script in a transaction so it is an atomic operation
         Spree::GiftCard.transaction do
           @gift_card = GiftCard.new(gift_card_params)
-          @gift_card.save!
           # Create line item
           line_item = LineItem.new(quantity: 1)
           line_item.gift_card = @gift_card
@@ -70,7 +70,7 @@ module Spree
     end
 
     def load_master_variant
-      @master_variant = Spree::Product.find_by(slug: params[:product_id]).try(:master)
+      @variant = Spree::Product.find_by(slug: params[:product_id]).try(:master)
     end
 
   end

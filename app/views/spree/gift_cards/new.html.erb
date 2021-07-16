@@ -1,30 +1,40 @@
-<fieldset id="gift-card-container">
-  <h1 class="taxon-title"><%= Spree.t(:gift_certificates) %></h1>
-  <%= render "spree/shared/error_messages", target: @gift_card %>
-  <%= form_for @gift_card do |f| %>
-    <div class="col-md-6 col-md-offset-3">
-      <fieldset class="form-group">
-        <%= f.label :variant_id, Spree.t(:value) %>
-        <span class="required">*</span><br/>
-        <%= f.select :variant_id, variants_values(@gift_card_variants), { selected: @variant.try(:id) }, class: 'form-control' %>
-      </fieldset>
-
-      <fieldset class="form-group">
-        <%= f.label :name, Spree.t(:name_of_gift_recipient) %>
-        <span class="required">*</span><br/>
-        <%= f.text_field :name, class: 'form-control' %>
-      </fieldset>
-
-      <fieldset class="form-group">
-        <%= f.label :note, Spree.t(:message_to_recipient) %><br/>
-        <%= f.text_area :note, rows: 6, class: 'form-control' %>
-      </fieldset>
-
-      <fieldset class="form-group hidden">
-        <%= f.hidden_field :currency, value: current_currency %>
-      </fieldset>
-
-      <%= f.submit Spree.t(:add_to_cart), class: 'btn btn-lg btn-dark btn-primary' %>
+<div class="container gift-card-container" id="gift-card-container">
+  <div class="row">
+    <div class="col-12">
+      <h3 class="text-uppercase spree-mb-large spree-mt-large spree-header"><%= Spree.t(:gift_certificates) %></h3>
     </div>
-  <% end %>
-</fieldset>
+  </div>
+  <div class="row">
+    <div class="offset-lg-3 col-lg-6">
+      <%= render "spree/shared/error_messages", target: @gift_card %>
+      <%= form_for @gift_card do |f| %>
+        <div class="form-group">
+          <div id="variant_id" class="form-group checkout-content-inner-field has-float-label">
+            <%= f.select :variant_id, variants_values(@gift_card_variants), { selected: @variant.try(:id) }, class: 'spree-flat-input required col-12 mb-lg-2' %>
+            <%= f.label(:variant_id, Spree.t(:value), class: 'text-uppercase') %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div id="name" class="form-group checkout-content-inner-field has-float-label">
+            <%= f.text_field :name, class: 'spree-flat-input required col-12 mb-lg-2', placeholder: Spree.t(:name_of_gift_recipient), aria: { label: Spree.t(:name_of_gift_recipient) } %>
+            <%= f.label(:name, Spree.t(:name_of_gift_recipient), class: 'text-uppercase') %>
+          </div>
+        </div>
+
+        <div class="form-group mb-4">
+          <div id="comments" class="form-group checkout-content-inner-field has-float-label">
+            <%= f.text_area :note, class: 'spree-flat-input', rows: 5, required: false, placeholder: Spree.t(:message_to_recipient), aria: { label: Spree.t(:message_to_recipient) } %>
+            <%= f.label(:note, Spree.t(:message_to_recipient), class: 'text-uppercase') %>
+          </div>
+        </div>
+
+        <div class="form-group hidden">
+          <%= f.hidden_field :currency, value: current_currency %>
+        </div>
+
+        <%= f.submit Spree.t(:add_to_cart), class: 'btn btn-primary btn-block spree-btn ' %>
+      <% end %>
+    </div>
+  </div>
+</div>
